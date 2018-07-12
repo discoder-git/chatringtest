@@ -1,3 +1,14 @@
+/*
+Datafeed API file
+
+resolveSymbol() - вызывается при инициализации компонента
+
+symbolName - пара валют для сравнения (default - "Coinbase:BTC/USD")
+Предполагается, что объект symbolInfo передается в обратный вызов onSymbolResolved,
+переданный в функцию resolveSymbol библиотекой диаграмм.
+
+*/
+
 import historyProvider from './historyProvider'
 import stream from './stream'
 
@@ -7,6 +18,8 @@ const config = {
     supported_resolutions: supportedResolutions
 };
 
+
+/* Экспортирует Datafeed Object */
 export default {
 	onReady: cb => {
 	console.log('=====onReady running')
@@ -18,10 +31,11 @@ export default {
 	},
 	resolveSymbol: (symbolName, onSymbolResolvedCallback, onResolveErrorCallback) => {
 		// expects a symbolInfo object in response
-		console.log('======resolveSymbol running')
-		// console.log('resolveSymbol:',{symbolName})
+		console.log('======resolveSymbol running', 'symbolName: ' + symbolName)
+		console.log('resolveSymbol:', {symbolName})
 		var split_data = symbolName.split(/[:/]/)
-		// console.log({split_data})
+		console.log('split_data:', {split_data})
+
 		var symbol_stub = {
 			name: symbolName,
 			description: '',
@@ -34,7 +48,7 @@ export default {
 			pricescale: 100000000,
 			has_intraday: true,
 			intraday_multipliers: ['1', '60'],
-			supported_resolution:  supportedResolutions,
+			supported_resolution: supportedResolutions,
 			volume_precision: 8,
 			data_status: 'streaming',
 		}
@@ -53,8 +67,8 @@ export default {
 	},
 	getBars: function(symbolInfo, resolution, from, to, onHistoryCallback, onErrorCallback, firstDataRequest) {
 		console.log('=====getBars running')
-		// console.log('function args',arguments)
-		// console.log(`Requesting bars between ${new Date(from * 1000).toISOString()} and ${new Date(to * 1000).toISOString()}`)
+		console.log('getBars function args',arguments)
+	    console.log(`Requesting bars between ${new Date(from * 1000).toISOString()} and ${new Date(to * 1000).toISOString()}`)
 		historyProvider.getBars(symbolInfo, resolution, from, to, firstDataRequest)
 		.then(bars => {
 			if (bars.length) {

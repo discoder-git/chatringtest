@@ -1,3 +1,15 @@
+/*
+НЕКОТОРЫЕ ЗАМЕТКИ ПО КОДУ
+
+TV Widget Constructor — takes widget options object, pass in the datafeed, the default symbol pair to display, user options, chart load/save options
+Datafeed — Interface between the JS API and your backend
+JS API — Function signatures required by TV to display your data
+History Provider — OHLCV bar API
+Realtime Provider — Update latest candle in realtime, start new candles
+Symbol Store — List of available symbols
+
+*/
+
 import * as React from 'react';
 import './index.css';
 import Datafeed from './api/'

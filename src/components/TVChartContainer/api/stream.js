@@ -1,3 +1,10 @@
+/*
+
+subscribeBars - Этот метод будет вызываться библиотекой диаграмм после вызова resolSymbol,
+                предполагая, что мы смогли успешно разрешить символ.
+
+*/
+
 // api/stream.js
 import historyProvider from './historyProvider.js'
 // we use Socket.io client to connect to cryptocompare's socket.io stream

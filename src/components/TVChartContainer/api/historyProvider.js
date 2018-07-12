@@ -1,3 +1,10 @@
+/*
+
+Предоставляет интерфейс для запроса данных по Барам в прошлом
+из исторического АПИ https://min-api.cryptocompare.com/
+
+*/
+
 var rp = require('request-promise').defaults({json: true})
 
 const api_root = 'https://min-api.cryptocompare.com'
@@ -17,7 +24,7 @@ export default {
 					limit: limit ? limit : 2000,
 					// aggregate: 1//resolution
 				}
-			// console.log({qs})
+			console.log('getBars query string: ', {qs})
 
         return rp({
                 url: `${api_root}${url}`,
@@ -45,6 +52,7 @@ export default {
 							var lastBar = bars[bars.length - 1]
 							history[symbolInfo.name] = {lastBar: lastBar}
 						}
+                        console.log('Bars которые возвращает функция getBars: ', bars)
 					return bars
 				} else {
 					return []
